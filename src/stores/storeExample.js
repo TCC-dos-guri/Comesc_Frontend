@@ -52,6 +52,7 @@ export const useAnyStorage = defineStore('any', () => {
       state.value.anys = await serviceExample.getAny()
     } catch (error) {
       state.value.error = error
+      throw error
     } finally {
       state.value.loading = false
       state.value.connection = true
@@ -70,6 +71,7 @@ export const useAnyStorage = defineStore('any', () => {
       state.value.anyById = await serviceExample.getAnyById(anyId)
     } catch (error) {
       state.value.error = error
+      throw error
     } finally {
       state.value.loading = false
       state.value.connection = true
@@ -88,6 +90,7 @@ export const useAnyStorage = defineStore('any', () => {
       state.value.anys.push(await serviceExample.createAny(newAny))
     } catch (error) {
       state.value.error = error
+      throw error
     } finally {
       state.value.loading = false
     }
@@ -108,6 +111,7 @@ export const useAnyStorage = defineStore('any', () => {
       }
     } catch (error) {
       state.value.error = error
+      throw error
     } finally {
       state.value.loading = false
     }
@@ -128,6 +132,7 @@ export const useAnyStorage = defineStore('any', () => {
       }
     } catch (error) {
       state.value.error = error
+      throw error
     } finally {
       state.value.loading = false
     }
