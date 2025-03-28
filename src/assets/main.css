@@ -1,3 +1,6 @@
+@import "tailwindcss";
+@import "@mdi/font/css/materialdesignicons.css";
+
 
 #app {
   max-width: 100dvw;
