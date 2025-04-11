@@ -33,7 +33,7 @@ class ExampleService {
         throw error
       }
     }
- 
+
 
   /**
    * Creates a new objects.

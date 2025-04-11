@@ -13,24 +13,24 @@ const api = axios.create({
 
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('access'); 
+        const token = localStorage.getItem('access');
         if (token) {
             config.headers['Authorization'] = `Bearer ${token}`;
         }
-        return config;  
+        return config;
     },
     (error) => {
-        
+
         return Promise.reject(error);
     }
 );
 
 //Return an response for any requisition made
 api.interceptors.response.use(
-    (response) => response, 
+    (response) => response,
     (error) => {
-       
-        return Promise.reject(error);  
+
+        return Promise.reject(error);
     }
 );
 
