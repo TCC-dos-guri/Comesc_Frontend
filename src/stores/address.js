@@ -1,7 +1,7 @@
 
 import { defineStore } from 'pinia';
 import {computed} from 'vue';
-import { addressService } from '@/services';
+import { AddressService } from '@/services';
 import { useStorage } from '@vueuse/core';
 
 export const useAddressStorage = defineStore('address', () => {
@@ -19,10 +19,10 @@ export const useAddressStorage = defineStore('address', () => {
   const selectedAddress = computed(() => state.value.selectedAddress)
   const conected = computed(() => state.value.loading)
 
-  const  getData = async () => {
+  const  GetAddress = async () => {
     state.value.loading = true
     try {
-      state.value.address = await addressService.getAddress()
+      state.value.address = await AddressService.GetAddress()
     }
     catch (error){
       state.value.error = error
@@ -34,10 +34,10 @@ export const useAddressStorage = defineStore('address', () => {
     }
   }
 
-  const getAddressById = async (addressId) => {
+  const GetAddressById = async (addressId) => {
     state.value.loading = true
     try {
-      const response = await addressService.getAddressById(addressId)
+      const response = await AddressService.GetAddressById(addressId)
       state.value.addressById = response
       return response
     } catch (error) {
@@ -49,10 +49,10 @@ export const useAddressStorage = defineStore('address', () => {
     }
   }
 
-  const createAddress = async (newAddress) => {
+  const CreateAddress = async (newAddress) => {
     state.value.loading = true
     try{
-      state.value.address.push(await addressService.createAddress(newAddress))
+      state.value.address.push(await AddressService.CreateAddress(newAddress))
     }catch (error){
       state.value.error = error
       throw error
@@ -61,12 +61,12 @@ export const useAddressStorage = defineStore('address', () => {
     }
   }
 
-    const updateAddress = async (address) => {
+    const UpdateAddress = async (address) => {
       state.value.loading = true
       try {
-        const index = state.value.anys.findIndex((s) => s.id === address.id)
+        const index = state.value.address.findIndex((s) => s.id === address.id)
         if (index !== -1) {
-          state.value.address[index] = await addressService.updateAddress(address)
+          state.value.address[index] = await AddressService.UpdateAddress(address)
         }
       } catch (error) {
         state.value.error = error
@@ -76,12 +76,12 @@ export const useAddressStorage = defineStore('address', () => {
       }
     }
 
-    const deleteAddress = async (id) => {
+    const DeleteAddress = async (id) => {
       state.value.loading = true
       try {
         const index = state.value.address.findIndex((s) => s.id === id)
         if (index !== -1) {
-          await addressService.deleteAddress(id)
+          await AddressService.DeleteAddress(id)
           state.value.address.splice(index, 1)
         }
       } catch (error) {
@@ -98,11 +98,11 @@ export const useAddressStorage = defineStore('address', () => {
   addressById,
   selectedAddress,
   conected,
-  getData,
-  getAddressById,
-  createAddress,
-  updateAddress,
-  deleteAddress
+  GetAddress,
+  GetAddressById,
+  CreateAddress,
+  UpdateAddress,
+  DeleteAddress
   }
 
 },)
