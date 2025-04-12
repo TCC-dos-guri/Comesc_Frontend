@@ -22,7 +22,9 @@ export const useAddressStorage = defineStore('address', () => {
   const  GetAddress = async () => {
     state.value.loading = true
     try {
-      state.value.address = await AddressService.GetAddress()
+      const response = await AddressService.GetAddress();
+      state.value.address = response;
+      return response
     }
     catch (error){
       state.value.error = error
@@ -52,7 +54,9 @@ export const useAddressStorage = defineStore('address', () => {
   const CreateAddress = async (newAddress) => {
     state.value.loading = true
     try{
-      state.value.address.push(await AddressService.CreateAddress(newAddress))
+      const response = await AddressService.CreateAddress(newAddress)
+      state.value.addressById = response
+      return response
     }catch (error){
       state.value.error = error
       throw error
@@ -84,6 +88,7 @@ export const useAddressStorage = defineStore('address', () => {
           await AddressService.DeleteAddress(id)
           state.value.address.splice(index, 1)
         }
+        
       } catch (error) {
         state.value.error = error
         throw error
