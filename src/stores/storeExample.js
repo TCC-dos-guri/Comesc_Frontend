@@ -68,7 +68,9 @@ export const useAnyStorage = defineStore('any', () => {
   const getAnyById = async (anyId) => {
     state.value.loading = true
     try {
-      state.value.anyById = await serviceExample.getAnyById(anyId)
+      const response = await serviceExample.getAnyById(anyId)
+      state.value.anyById = response
+      return response
     } catch (error) {
       state.value.error = error
       throw error

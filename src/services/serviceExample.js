@@ -26,14 +26,14 @@ class ExampleService {
    */
     async getAnyById(anyId) {
       try {
-        const { data } = await api.get(`/url-here/?page=1&id=${systemId}`)
+        const { data } = await api.get(`/url-here/?page=1&id=${anyId}`)
         return data.results
       } catch (error) {
         console.log('error in getAny', error)
         throw error
       }
     }
- 
+
 
   /**
    * Creates a new objects.
