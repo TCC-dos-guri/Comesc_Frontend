@@ -1,56 +1,56 @@
 import api from '../../api'
 
-class colorService {
+class ColorService {
 
-  async getColor() {
+  async GetColor() {
     try{
       const response = await api.get('/color/')
       return response.data
     }catch (error){
-      console.log('error in getColor', error)
+      console.log('error in GetColor', error)
       throw error
     }
   }
 
-  async getColorById(colorId) {
+  async GetColorById(colorId) {
     try{
       const response = await api.get(`/color/?page=1&id=${colorId}`)
       return response.data
     }catch (error){
-      console.log('error in getColorById', error)
+      console.log('error in GetColorById', error)
       throw error
     }
   }
 
-  async createColor(newColor) {
+  async CreateColor(newColor) {
     try{
       const response = await api.post('/color/', newColor)
       return response.data
     }catch (error){
-      console.log('error in createColor', error)
+      console.log('error in CreateColor', error)
       throw error
     }
   }
 
-  async updateColor(color) {
+  async UpdateColor(color) {
     try{
       const response = await api.put(`/color/${color.id}/`, color)
       return response.data
     }catch (error){
-      console.log('error in updateColor', error)
+      console.log('error in UpdateColor', error)
       throw error
     }
   }
 
-  async deleteColor(colorId) {
+  async DeleteColor(colorId) {
     try{
       const response = await api.delete(`/color/${colorId}/`)
       return response.data
     }catch (error){
-      console.log('error in deleteColor', error)
+      console.log('error in DeleteColor', error)
       throw error
     }
   }
 }
 
-export default new colorService()
+export default new ColorService()
