@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { batchService } from '@/services'
 import { storage } from '@vueuse/core'
 
-export const usebatchStore = defineStorage('batch', () => {
+export const useBatchStore = defineStorage('batch', () => {
   const state = storage( 'batchStorage', {
     batchs: [],
     selectedbatch: null,

@@ -42,7 +42,7 @@ class BatchService {
     }
   }
 
-  async DeleteColor(batchId) {
+  async DeleteBatch(batchId) {
     try{
       const response = await api.delete(`/color/${batchId}/`)
       return response.data
