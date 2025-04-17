@@ -4,7 +4,7 @@ import {computed} from 'vue';
 import { AddressService } from '@/services';
 import { useStorage } from '@vueuse/core';
 
-export const useAddressStorage = defineStore('address', () => {
+export const useAddressStore = defineStore('address', () => {
 
   const state = useStorage('addressStorage', {
     address: [],
