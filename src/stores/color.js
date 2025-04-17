@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { ColorService } from '@/services'
 import { storage } from '@vueuse/core'
 
-export const useColorStorage = defineStorage('color', () => {
+export const useColorStore = defineStorage('color', () => {
   const state = storage( 'colorStorage', {
     colors: [],
     selectedColor: null,

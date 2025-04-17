@@ -1,5 +1,7 @@
-import { useAnyStorage } from "./storeExample";
+import { useAnyStore } from "./storeExample";
+import { useColorStore } from "./color";
 
 export {
-  useAnyStorage
+  useAnyStore,
+  useColorStore
 }

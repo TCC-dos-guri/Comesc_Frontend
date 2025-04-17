@@ -25,7 +25,7 @@ import { useStorage } from '@vueuse/core'
  * @function useAnyStorage
  * @returns {AnyStore} The any store instance.
  */
-export const useAnyStorage = defineStore('any', () => {
+export const useAnyStore = defineStore('any', () => {
   const state = useStorage('anyStorage', {
     anys: [],
     selectedAny: null,
