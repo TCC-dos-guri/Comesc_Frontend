@@ -6,7 +6,7 @@ defineProps({
   },
   title: {
     type: String,
-    default: 'texto',
+    default: 'text-here',
   },
   extraDiv: {
     type: Boolean,
@@ -24,6 +24,6 @@ defineProps({
 
 
   <!--
-  <GlobalButton :btnStyle="['']" title="Proximo passo" :extraDiv="true" / 
+  <GlobalButton :btnStyle="['']" title="Proximo passo" :extraDiv="true" /
   -->
 </template>
