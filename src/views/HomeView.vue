@@ -1,7 +1,7 @@
-
+<script setup>
+import GlobalButton from '@/components/GlobalButton.vue'
+</script>
 
 <template>
-  <main>
-    <h1>Hello World</h1>
-  </main>
+  
 </template>
