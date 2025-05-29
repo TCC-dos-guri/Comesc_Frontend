@@ -1,39 +1,23 @@
 <template>
-  <div class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="w-full max-w-sm bg-white rounded-b-3xl shadow-lg">
-      <!-- Cabeçalho -->
+  <div class="container-custom">
+    <div class="card-custom">
       <div class="header-section text-center">
         <h1 class="logo-text">COMESC</h1>
         <h2 class="title-text">Conecte-se</h2>
       </div>
 
-      <!-- Formulário -->
       <form @submit.prevent="handleLogin" class="form-section">
         <div>
           <label class="form-label">Email</label>
-          <input
-            type="email"
-            v-model="email"
-            placeholder="seu email aqui"
-            required
-            class="form-input"
-          />
+          <input type="email" v-model="email" placeholder="seu email aqui" required class="form-input" />
         </div>
 
         <div>
           <label class="form-label">Senha</label>
-          <input
-            type="password"
-            v-model="password"
-            placeholder="Sua senha aqui"
-            required
-            class="form-input"
-          />
+          <input type="password" v-model="password" placeholder="Sua senha aqui" required class="form-input" />
         </div>
 
-        <button type="submit" class="login-button">
-          Entrar
-        </button>
+        <button type="submit" class="login-button">Entrar</button>
 
         <p v-if="errorMessage" class="error-message">
           {{ errorMessage }}
@@ -56,7 +40,7 @@ const password = ref('')
 const errorMessage = ref('')
 
 const handleLogin = () => {
-  if (email.value === 'admin@comesc.com' && password.value === '123456') {
+  if (email.value === 'admin@com' && password.value === 'admin') {
     alert('Login bem-sucedido!')
     errorMessage.value = ''
   } else {
@@ -66,6 +50,24 @@ const handleLogin = () => {
 </script>
 
 <style scoped>
+.container-custom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f3f4f6;
+}
+
+.card-custom {
+  width: 100%;
+  max-width: 24rem;
+  background-color: #ffffff;
+  border-bottom-left-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
 .header-section {
   background-color: #2C2149;
   color: white;
@@ -97,7 +99,7 @@ const handleLogin = () => {
   display: block;
   font-size: 0.875rem;
   font-weight: 500;
-  color: #374151;
+  color: #000000;
   margin-bottom: 0.25rem;
 }
 
@@ -132,7 +134,8 @@ const handleLogin = () => {
 .error-message {
   color: #ef4444;
   text-align: center;
-  font-size: 0.875rem;
+  font-size: 12pt;
+  transition: 0.2s;
 }
 
 .register-text {
