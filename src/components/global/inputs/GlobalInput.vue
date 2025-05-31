@@ -17,8 +17,8 @@
     const model = defineModel('value')
 </script>
 <template>
-    <div class="flex flex-col ga-2">
-        <label for="input" v-if="label">{{ label }}</label>
+    <div class="flex flex-col gap-2">
+        <label for="input" v-if="label" class="text-xl ms-1">{{ label }}</label>
         <input type="text" :placeholder="placeholder" :class="class_input" v-model="model">
     </div>
 </template>
