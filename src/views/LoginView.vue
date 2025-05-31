@@ -10,7 +10,6 @@
           </div>
           <h2 class="text-4xl font-bold mb-7">Conecte-se</h2>
       </div>
-
       <div class="flex flex-col jusitfy-center items-center p-10 gap-2 mt-2">
         <GlobalInput v-for="info, i in LoginInput" :key="i" :label="info.label" :placeholder="info.placeholder" v-model:value="info.value" class_input="outline-0 border border-neutral-400 rounded-xl p-3 w-full" class="w-full"/>
         <div class="flex justify-center items-center mt-10 flex-col">
