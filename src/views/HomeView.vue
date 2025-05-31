@@ -18,7 +18,7 @@
             controle total.
           </p>
         </div>
-        <GlobalButton title="Explore o sistema" btn-style="bg-[#2C2149] flex justify-center items-center p-1 w-52 rounded-4xl" @click="router.push('/login')"/>
+        <GlobalButton title="Explore o sistema" btn-style="bg-[#2C2149] flex justify-center items-center p-1 w-52 rounded-4xl" @click="router.push('/type')"/>
       </div>
     </div>
   </div>
