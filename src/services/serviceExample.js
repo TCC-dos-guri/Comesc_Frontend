@@ -1,4 +1,4 @@
-import api from '../../plugins/api'
+import api from '@/plugins/api'
 
 /**
  * Service class for handling objects related operations.

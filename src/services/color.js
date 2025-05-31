@@ -1,4 +1,4 @@
-import api from '../../api'
+import api from '@/plugins/api'
 
 class ColorService {
 

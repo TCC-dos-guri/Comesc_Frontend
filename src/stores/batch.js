@@ -1,10 +1,10 @@
-import { defineStorage } from 'pinia'
+import { defineStore } from 'pinia'
 import { computed } from 'vue'
-import { batchService } from '@/services'
-import { storage } from '@vueuse/core'
+import { BatchService } from '@/services'
+import { useStorage } from '@vueuse/core'
 
-export const useBatchStore = defineStorage('batch', () => {
-  const state = storage( 'batchStorage', {
+export const useBatchStore = defineStore('batch', () => {
+  const state = useStorage( 'batchStorage', {
     batchs: [],
     selectedbatch: null,
     batchById: null,
@@ -22,9 +22,10 @@ export const useBatchStore = defineStorage('batch', () => {
   const GetBatchs = async () => {
     state.value.loading = true
     try {
-      const response = await batchService.Getbatchs()
-      state.value.batchs = response.data
-      return response.data
+      const response = await BatchService.GetBatch()
+      
+      state.value.batchs = response
+      return response
     } catch (error) {
       state.value.error = error
       throw error
@@ -37,9 +38,9 @@ export const useBatchStore = defineStorage('batch', () => {
   const GetBatchById = async (batchId) => {
     state.value.loading = true
     try {
-      const response = await batchService.GetbatchById(batchId)
-      state.value.batchById = response.data
-      return response.data
+      const response = await BatchService.GetBatchById(batchId)
+      state.value.batchById = response
+      return response
     } catch (error) {
       state.value.error = error
       throw error
@@ -52,8 +53,8 @@ export const useBatchStore = defineStorage('batch', () => {
 const CreateBatch = async (newBatch) => {
     state.value.loading = true
     try {
-      const response = state.value.batchs.push(await batchService.Createbatch(newBatch))
-      return response.data
+      const response = state.value.batchs.push(await BatchService.CreateBatch(newBatch))
+      return response
     } catch (error) {
       state.value.error = error
       throw error
@@ -67,7 +68,7 @@ const CreateBatch = async (newBatch) => {
     try {
       const index = state.value.batchs.findIndex((s) => s.id === batch.id)
       if (index !== -1) {
-        state.value.batchs[index] = await batchService.Updatebatch(batch)
+        state.value.batchs[index] = await BatchService.UpdateBatch(batch)
       }
     } catch (error) {
       state.value.error = error
@@ -82,7 +83,7 @@ const CreateBatch = async (newBatch) => {
     try {
       const index = state.value.batchs.findIndex((s) => s.id === id)
       if (index !== -1) {
-        await batchService.Deletebatch(id)
+        await BatchService.DeleteBatch(id)
         state.value.batchs.splice(index, 1)
       }
     } catch (error) {

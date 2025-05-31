@@ -3,11 +3,13 @@ import { useColorStore } from "./color";
 import { useAddressStore } from "./address";
 import { useBatchStore } from "./batch";
 import { useInventoryStore } from "./inventory";
+import { useRollStore } from "./roll";
 
 export {
   useAnyStore,
   useColorStore,
   useAddressStore,
   useBatchStore,
-  useInventoryStore
+  useInventoryStore,
+  useRollStore
 }

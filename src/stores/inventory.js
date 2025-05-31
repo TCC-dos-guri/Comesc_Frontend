@@ -1,11 +1,11 @@
-import { defineStorage } from 'pinia'
+import { defineStore } from 'pinia'
 import { computed } from 'vue'
 import { InventoryService } from '@/services'
-import { storage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core'
 
-export const useInventoryStore = defineStorage('inventory', () => {
-  const state = storage( 'inventoryStorage', {
-    inventorys: [],
+export const useInventoryStore = defineStore('inventory', () => {
+  const state = useStorage('inventoryStorage', {
+    inventorys: [], 
     selectedinventory: null,
     inventoryById: null,
     connection: false,
@@ -22,15 +22,15 @@ export const useInventoryStore = defineStorage('inventory', () => {
   const GetInventory = async () => {
     state.value.loading = true
     try {
-      const response = await InventoryService.Getinventory()
-      state.value.inventorys = response.data
-      return response.data
+      const response = await InventoryService.GetInventory()
+      state.value.inventorys = response
+      state.value.connection = true
+      return response
     } catch (error) {
       state.value.error = error
       throw error
-    }finally {
+    } finally {
       state.value.loading = false
-      state.value.connection = true
     }
   }
 
@@ -38,22 +38,23 @@ export const useInventoryStore = defineStorage('inventory', () => {
     state.value.loading = true
     try {
       const response = await InventoryService.GetInventoryById(inventoryId)
-      state.value.inventoryById = response.data
-      return response.data
+      state.value.inventoryById = response
+      state.value.connection = true
+      return response
     } catch (error) {
       state.value.error = error
       throw error
-    }finally {
+    } finally {
       state.value.loading = false
-      state.value.connection = true
     }
   }
 
-const CreateInventory = async (newInventory) => {
+  const CreateInventory = async (newInventory) => {
     state.value.loading = true
     try {
-      const response = state.value.inventorys.push(await InventoryService.Createinventory(newInventory))
-      return response.data
+      const response = await InventoryService.Createinventory(newInventory)
+      state.value.inventorys.push(response)
+      return response
     } catch (error) {
       state.value.error = error
       throw error
@@ -65,10 +66,12 @@ const CreateInventory = async (newInventory) => {
   const UpdateInventory = async (inventory) => {
     state.value.loading = true
     try {
+      const response = await InventoryService.UpdateInventory(inventory)
       const index = state.value.inventorys.findIndex((s) => s.id === inventory.id)
       if (index !== -1) {
-        state.value.inventorys[index] = await InventoryService.UpdateInventory(inventory)
+        state.value.inventorys[index] = response
       }
+      return response
     } catch (error) {
       state.value.error = error
       throw error
@@ -93,7 +96,18 @@ const CreateInventory = async (newInventory) => {
     }
   }
 
-  return{
+  const resetInventoryState = () => {
+    state.value = {
+      inventorys: [],
+      selectedinventory: null,
+      inventoryById: null,
+      connection: false,
+      error: null,
+      loading: false,
+    }
+  }
+
+  return {
     state,
     inventory,
     inventoryById,
@@ -105,5 +119,6 @@ const CreateInventory = async (newInventory) => {
     GetInventoryById,
     CreateInventory,
     DeleteInventory,
+    resetInventoryState
   }
 })
