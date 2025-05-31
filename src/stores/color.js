@@ -1,10 +1,10 @@
-import { defineStorage } from 'pinia'
+import { defineStore } from 'pinia'
 import { computed } from 'vue'
 import { ColorService } from '@/services'
-import { storage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core'
 
-export const useColorStore = defineStorage('color', () => {
-  const state = storage( 'colorStorage', {
+export const useColorStore = defineStore('color', () => {
+  const state = useStorage( 'colorStorage', {
     colors: [],
     selectedColor: null,
     colorById: null,
@@ -22,9 +22,9 @@ export const useColorStore = defineStorage('color', () => {
   const GetColors = async () => {
     state.value.loading = true
     try {
-      const response = await ColorService.GetColors()
-      state.value.colors = response.data
-      return response.data
+      const response = await ColorService.GetColor()
+      state.value.colors = response
+      return response
     } catch (error) {
       state.value.error = error
       throw error
@@ -38,8 +38,8 @@ export const useColorStore = defineStorage('color', () => {
     state.value.loading = true
     try {
       const response = await ColorService.GetColorById(colorId)
-      state.value.colorById = response.data
-      return response.data
+      state.value.colorById = response
+      return response
     } catch (error) {
       state.value.error = error
       throw error
@@ -53,7 +53,7 @@ const CreateColor = async (newColor) => {
     state.value.loading = true
     try {
       const response = state.value.colors.push(await ColorService.CreateColor(newColor))
-      return response.data
+      return response
     } catch (error) {
       state.value.error = error
       throw error
