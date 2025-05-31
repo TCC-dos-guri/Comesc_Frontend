@@ -2,7 +2,7 @@
 import { HeaderDefault, DefaultCard, BatchFilter, DefaultCardContainer } from '@/components';
 import { useBatchStore, useRollStore } from '@/stores';
 import { onMounted, ref } from 'vue';
-
+import { useBatchUtils } from '@/utils/batch';
 const batchStore = useBatchStore()
 const rollStore = useRollStore()
 
@@ -13,6 +13,33 @@ const findMaterial = (instance) => {
 onMounted(async()=> {
     await batchStore.GetBatchs()
 })
+
+// function debounce (func, delay) {
+//     let timeout;
+//     return function(...args) {
+//         clearTimeout(timeout);
+//         timeout = setTimeout(() => func.apply(this, args), delay);
+//     };
+// }
+
+// const search = async (search) => {
+
+//     if (search != '') {
+//         console.log(search)
+//     debounce(await batchStore.GetBatchsBySearch(search), 300)
+//     } else {
+//         console.log('search is empty')
+//         await batchStore.GetBatchs()
+//     }	
+  
+// }
+
+const {
+    filterByStatus,
+    search
+} = useBatchUtils()
+
+
 
 const open = ref(false)
 </script>
@@ -38,10 +65,11 @@ const open = ref(false)
 
         <div class="w-full flex flex-col p-4 relative">
 
-            <BatchFilter @open="open = !open" :open="open" />
+            <BatchFilter @search="search" @filterStatus="filterByStatus"  @open="open = !open" :open="open" />
 
             <DefaultCardContainer>
-                <DefaultCard :invoice="batch.invoice" :material_name="findMaterial(batch)" v-for="batch in batchStore.batch" :status="batch.status" :is_batch="true" :amount="batch.qtd" />
+                <DefaultCard v-if="batchStore.batch.length > 0" :invoice="batch.invoice" :material_name="findMaterial(batch)" v-for="batch in batchStore.batch" :status="batch.status" :is_batch="true" :amount="batch.qtd" />
+                <div v-else><p>Lotes não encontrados</p></div>
             </DefaultCardContainer>
         </div>
     </main>

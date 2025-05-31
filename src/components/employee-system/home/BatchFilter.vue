@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { options } from '@/utils/batch';
 
 const props = defineProps({
@@ -9,8 +9,12 @@ const props = defineProps({
 })
 
 const emits = defineEmits([
-    'open'
+    'open', 'filterStatus', 'search'
 ])
+
+const search = ref('')
+
+const selectedOption = ref('')
 
 const openRef = computed(()=>props.open)
 </script>
@@ -21,19 +25,21 @@ const openRef = computed(()=>props.open)
     </div>
       <div class="w-full flex justify-between relative items-center">
             <div class="w-[180px] py-2 rounded-lg px-1 bg-[#F0F0F0]">
-                <select class="w-full outline-0 h-full" id="">
-                    <option v-for="(option, index) in options" :value="option.value" >{{ option.name }}</option>
+                <select :value="selectedOption" @change="emits('filterStatus', $event.target.value)" class="w-full outline-0 h-full" id="">
+                    <option v-for="(option, index) in options":key="index" :value="option.value" >{{ option.name }}</option>
                 </select>
             </div>
 
            
             <span @click="emits('open')" class="mdi mdi-magnify absolute right-3 text-2xl z-20 text-[#A4A4A4]"></span>
              <transition :name="openRef ? 'slide-enter' : 'slide-leave'">
-            <div :class="['absolute w-full bg-[#EAEAEA] h-10 rounded-lg flex p-3', openRef ? 'slide-enter' : 'slide-leave']">
-                <input type="text"  id="" class="w-10/12 outline-0" placeholder="Pesquise aqui...">
+            <div :class="['absolute z-20 w-full bg-[#EAEAEA] h-10 rounded-lg flex p-3', openRef ? 'slide-enter' : 'slide-leave']">
+                <input @keyup="emits('search', search)" v-model="search" type="text"  id="" class="w-10/12 outline-0" placeholder="Pesquise aqui...">
             </div>
             
             </transition>
+            <div v-if="openRef" @click="emits('open')" class="w-dvw h-dvh z-10 absolute"></div>
+
             </div>
 
 </template>

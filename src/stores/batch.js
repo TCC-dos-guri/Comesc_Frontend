@@ -35,6 +35,22 @@ export const useBatchStore = defineStore('batch', () => {
     }
   }
 
+    const GetBatchsBySearch = async (search) => {
+    state.value.loading = true
+    try {
+      const response = await BatchService.GetBatchBySearch(search)
+      
+      state.value.batchs = response
+      return response
+    } catch (error) {
+      state.value.error = error
+      throw error
+    }finally {
+      state.value.loading = false
+      state.value.connection = true
+    }
+  }
+
   const GetBatchById = async (batchId) => {
     state.value.loading = true
     try {
@@ -104,6 +120,7 @@ const CreateBatch = async (newBatch) => {
     UpdateBatch,
     GetBatchs,
     GetBatchById,
+    GetBatchsBySearch,
     CreateBatch,
     DeleteBatch,
   }
