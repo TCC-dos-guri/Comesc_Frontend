@@ -1,3 +1,4 @@
+import { ref } from "vue"
 export const selectStatusIcon = (status) => {
         switch (status) {
             case 'pendente':
@@ -11,3 +12,10 @@ export const selectStatusIcon = (status) => {
                 
         }
     }
+
+export const options = ref([
+    {name: 'Lotes Pendentes', value: 'pendentes'},
+    {name: 'Em Estoque', value: 'em estoque'},
+    {name: 'Com Defeito', value: 'com defeito'},
+    {name: 'Em Transporte', value: 'em transporte'}
+])

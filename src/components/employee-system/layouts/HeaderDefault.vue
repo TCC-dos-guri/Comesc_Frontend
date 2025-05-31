@@ -29,7 +29,7 @@ const toggleMenu = () => {
     <span class="mdi mdi-bell cursor-pointer"></span>
   </header>
 
-  <div v-if="open" :class="['w-dvw h-dvh absolute top-0 z-30 bg-[rgba(38,29,71,0.3)]', isClosing ? 'close-animate-background' : 'open-animate-background']">
+  <div v-if="open" :class="['w-dvw h-dvh fixed top-0 z-30 bg-[rgba(38,29,71,0.3)]', isClosing ? 'close-animate-background' : 'open-animate-background']">
     <div
       :class="[
         'w-[150%] h-[80%] items-start justify-start z-40 text-white left-[-140px] flex absolute rounded-b-full flex-col bg-[#261D47]',
