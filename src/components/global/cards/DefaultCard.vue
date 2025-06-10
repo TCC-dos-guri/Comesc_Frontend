@@ -1,7 +1,7 @@
 <script setup>
 import { selectStatusIcon } from '@/utils/batch';
     const props = defineProps({
-        batch_invoice: {
+        invoice: {
             type: [String, Number]
         },
         material_name: {
@@ -27,7 +27,7 @@ import { selectStatusIcon } from '@/utils/batch';
 </script>
 
 <template>
-    <span class="w-[165px] h-[152px] relative flex hover:brightness-75 duration-150 cursor-pointer text-white flex-col justify-center items-center">
+    <span class="w-[155px] h-[148px] relative flex hover:brightness-75 duration-150 cursor-pointer text-white flex-col justify-center items-center">
         <div class=" absolute top-2 z-20 text-2xl " v-if="is_batch">
             <span :class="selectStatusIcon(props.status)"></span>
         </div>
@@ -39,7 +39,7 @@ import { selectStatusIcon } from '@/utils/batch';
 
 
         <div class="absolute font-poppins font-medium z-20 flex w-full flex-col items-center bottom-2">
-            <p class="text-md">Nº {{props.batch_invoice}}</p>
+            <p class="text-md">Nº {{props.invoice}}</p>
             <p class="text-[11px]"> {{ props.material_name }}</p>
             <p class="text-[11px]"> {{ props.amount }} {{  props.amount == 1 ? 'Peça' : 'Peças' }} </p>
         </div>

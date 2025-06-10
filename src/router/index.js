@@ -1,10 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '@/views/LoginView.vue'
-
 import Tests from '@/views/components-tests/Tests.vue'
-
 import TypeUserView from '@/views/TypeUserView.vue'
+import EmployeeHomeView from '@/views/employee-system/EmployeeHomeView.vue'
 
 
 const router = createRouter({
@@ -30,6 +29,11 @@ const router = createRouter({
       path: '/type',
       name: 'type',
       component: TypeUserView
+    },
+    {
+      path: '/employee',
+      name: 'employee-home',
+      component: EmployeeHomeView
     }
   ],
 })

@@ -12,6 +12,16 @@ class BatchService {
     }
   }
 
+   async GetBatchBySearch(search) {
+    try{
+      const response = await api.get(`/batch/?search=${search}`)
+      return response.data
+    }catch (error){
+      console.log('error in GetBatch per Search', error)
+      throw error
+    }
+  }
+
   async GetBatchById(batchId) {
     try{
       const response = await api.get(`/batch/?page=1&id=${batchId}`)
