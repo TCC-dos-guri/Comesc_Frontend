@@ -13,11 +13,15 @@ defineProps({
     type: Boolean,
     default: true,
   },
+  action: {
+    type: Function,
+  }
 });
 </script>
 <template>
   <button
     :class="btnStyle"
+    @click="action"
   >
     <span class="flex-1 font-normal text-lg text-center text-white p-1">{{ title }}</span>
     <i

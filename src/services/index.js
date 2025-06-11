@@ -4,6 +4,7 @@ import AddressService from './address';
 import BatchService from './batch';
 import InventoryService from "./inventory";
 import RollService from "./roll"
+import UserService from './auth'
 
 export {
     AddressService,
@@ -12,4 +13,5 @@ export {
     serviceExample,
     InventoryService, 
     RollService,
+    UserService
 }
