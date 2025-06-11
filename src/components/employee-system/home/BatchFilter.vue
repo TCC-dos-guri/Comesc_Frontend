@@ -26,7 +26,7 @@ const openRef = computed(()=>props.open)
       <div class="w-full flex justify-between relative items-center">
             <div class="w-[180px] py-2 rounded-lg px-1 bg-[#F0F0F0]">
                 <select :value="selectedOption" @change="emits('filterStatus', $event.target.value)" class="w-full outline-0 h-full" id="">
-                    <option v-for="(option, index) in options":key="index" :value="option.value" >{{ option.name }}</option>
+                    <option v-for="(option, index) in options" :key="index" :value="option.value" >{{ option.name }}</option>
                 </select>
             </div>
 

@@ -4,6 +4,7 @@ import { useAddressStore } from "./address";
 import { useBatchStore } from "./batch";
 import { useInventoryStore } from "./inventory";
 import { useRollStore } from "./roll";
+import { useAuthStore } from "./auth";
 
 export {
   useAnyStore,
@@ -11,5 +12,6 @@ export {
   useAddressStore,
   useBatchStore,
   useInventoryStore,
-  useRollStore
+  useRollStore,
+  useAuthStore
 }
