@@ -1,6 +1,10 @@
 <script setup>
   import {GlobalButton } from '@/components/index'
   import router from '@/router';
+
+  function gotoLogin(){
+    router.push('/auth')
+  }
 </script>
 <template>  
 <div class="flex justify-center items-center">
@@ -18,7 +22,7 @@
             controle total.
           </p>
         </div>
-        <GlobalButton title="Explore o sistema" btn-style="bg-[#2C2149] flex justify-center items-center p-1 w-64 rounded-4xl" @click="router.push('/type/')"/>
+        <GlobalButton :action="gotoLogin" title="Explore o sistema" btn-style="bg-[#2C2149] flex justify-center items-center p-1 w-64 rounded-4xl" />
       </div>
     </div>
   </div>
