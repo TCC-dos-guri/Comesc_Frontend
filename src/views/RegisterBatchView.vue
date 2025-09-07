@@ -6,7 +6,6 @@
     import { useBatchStore } from '@/stores';
     import { ref } from 'vue';
 
-
     const BatchRollForm = ref(true)
     const BatchStore = useBatchStore()
     

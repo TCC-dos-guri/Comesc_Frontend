@@ -7,11 +7,8 @@ import router from '@/router';
 const batchStore = useBatchStore()
 const rollStore = useRollStore()
 
-const findMaterial = (instance) => {
-    return rollStore.roll.find((s) => s.batch.id = instance.id).material.name
-}
-
 onMounted(async()=> {
+    console.log(batchStore.batch)
     await batchStore.GetBatchs()
 })
 
@@ -56,7 +53,7 @@ const open = ref(false)
         </div>
 
         <div class="w-full flex justify-center mt-3">
-            <div class="flex gap-3 items-center cursor-pointer " @click="router.push('/batch')">
+            <div class="flex gap-3 items-center cursor-pointer " @click="router.push('/batch/register/')">
                 <span class="w-8 h-8 rounded-xl flex justify-center items-center bg-[#261D47]">
                     <span class="mdi mdi-plus-circle text-white text-xl "></span>
                 </span>
@@ -69,7 +66,9 @@ const open = ref(false)
             <BatchFilter @search="search" @filterStatus="filterByStatus"  @open="open = !open" :open="open" />
 
             <DefaultCardContainer>
-                <DefaultCard v-if="batchStore.batch.length > 0" :invoice="batch.invoice" :material_name="findMaterial(batch)" v-for="batch in batchStore.batch" :status="batch.status" :is_batch="true" :amount="batch.qtd" />
+                <div v-if="batchStore.batch !== 0"> 
+                    <DefaultCard v-for="info in batchStore.batch" :key="info.id" :amount="info.qtd" :invoice="info.invoice" :image="info.cover?.url" :material_name="info.material" :status="info.status" :is_batch="true" @click="router.push(`/batch/${info.id}`)"/>
+                </div>
                 <div v-else><p>Lotes não encontrados</p></div>
             </DefaultCardContainer>
         </div>
