@@ -3,7 +3,7 @@ import axios from "axios";
 const apiURL = import.meta.env.VITE_API_URL
 //Allows the application to make requisition with the backend
 const api = axios.create({
-    baseURL: apiURL,
+    baseURL: 'http://localhost:8000/api',
     headers: {
         "Content-Type": "application/json"
     }
