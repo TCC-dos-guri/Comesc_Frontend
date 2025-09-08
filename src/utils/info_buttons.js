@@ -6,9 +6,9 @@ export const InfoBtn = [
         btn_style: 'text-white size-auto rounded-full flex flex-row-reverse justify-center'
     },
     {
-        title: 'Revisar Lote',
+        title: 'Revisar',
         extra_div: false,
-        btn_style: 'bg-[#2C2149] p-1 rounded-xl',
+        btn_style: 'bg-[#2C2149] p-1 w-48 rounded-xl',
     },
     {
         title: 'Excluir',

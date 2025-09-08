@@ -27,7 +27,7 @@ const router = createRouter({
       component: Tests,
     },
     {
-      path: '/batch',
+      path: '/batch/:id',
       name: 'batch',
       component: BatchView
     },

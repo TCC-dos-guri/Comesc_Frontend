@@ -101,6 +101,7 @@ const CreateBatch = async (newBatch) => {
     state.value.loading = true
     try {
       const response = state.value.batchs.push(await BatchService.CreateBatch(newBatch))
+      state.value.selectedbatch = response
       return response
     } catch (error) {
       state.value.error = error
@@ -108,7 +109,8 @@ const CreateBatch = async (newBatch) => {
     } finally {
       state.value.loading = false
       showMessage('Lote criado com sucesso', 'success', 1000, 'top-right', 'light', false)
-      router.push('/batch/')
+      
+      router.push(`/batch/${selectedbatch.value}`)
     }
   }
 
