@@ -22,8 +22,6 @@
         newObjects.forEach((el, i) => {
             infoArr.value.push({[el]: filterItems[i]})
         })
-
-        console.log(rollStore.roll)
     })
 </script>
 <template>
@@ -53,7 +51,7 @@
             <h1>Rolos Revisados: 0/{{ rollStore.roll.length }}</h1>
         </div>
         <DefaultCardContainer>
-            <DefaultCard v-for="roll in rollStore.roll" :key="roll.production_order" :invoice="roll.production_order"  :material_name="`${roll.kg}kg`" :image="batchStore.batchById[0].cover.url"/>
+            <DefaultCard v-for="roll in rollStore.roll.filter((el) => el.batch.id === id * 1)" :key="roll.production_order" :invoice="roll.production_order"  :material_name="`${roll.kg}kg`" :image="batchStore.batchById[0].cover.url"/>
         </DefaultCardContainer>
         <LayoutBarAction />
 </template>

@@ -40,6 +40,7 @@
 
     onMounted(() => {
         const newArr = [...FormInputs.value.slice(0, 2).map(el => el.value)]
+        console.log(BatchStore.selectedbatch)
         infoRolls.value[0].value = newArr[0]
         infoRolls.value[1].value = newArr[1]
     })
