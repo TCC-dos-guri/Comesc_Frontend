@@ -1,5 +1,6 @@
 <script setup>
   import {GlobalButton } from '@/components/index'
+  import LayoutBarAction from '@/components/layouts/LayoutBarAction.vue';
   import router from '@/router';
 
   function gotoLogin(){
