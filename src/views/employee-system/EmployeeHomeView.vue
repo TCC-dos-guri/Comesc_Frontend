@@ -30,8 +30,8 @@ onMounted(async()=> {
 //     } else {
 //         console.log('search is empty')
 //         await batchStore.GetBatchs()
-//     }	
-  
+//     }
+
 // }
 
 const {
@@ -67,10 +67,11 @@ const open = ref(false)
 
             <BatchFilter @search="search" @filterStatus="filterByStatus"  @open="open = !open" :open="open" />
 
-            <DefaultCardContainer>
-                <DefaultCard v-if="batchStore.batch.length > 0" :invoice="batch.invoice" :material_name="findMaterial(batch)" v-for="batch in batchStore.batch" :status="batch.status" :is_batch="true" :amount="batch.qtd" />
-                <div v-else><p>Lotes não encontrados</p></div>
+            <DefaultCardContainer v-if="batchStore.batch.length > 0">
+                <DefaultCard :invoice="batch.invoice" :material_name="findMaterial(batch)" v-for="batch in batchStore.batch" :key="batch.id" @click="batchStore.selectedbatch = batch.id" :status="batch.status" :is_batch="true" :amount="batch.qtd" />
             </DefaultCardContainer>
+            <div v-else><p>Lotes não encontrados</p></div>
+            
         </div>
     </main>
 </template>

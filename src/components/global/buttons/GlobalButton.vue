@@ -1,5 +1,4 @@
 <script setup>
-defineEmits(["click"]);
 defineProps({
   btnStyle: {
     type: String,
@@ -11,17 +10,13 @@ defineProps({
   },
   extraDiv: {
     type: Boolean,
-    default: true,
+    default: false,
   },
-  action: {
-    type: Function,
-  }
 });
 </script>
 <template>
   <button
     :class="btnStyle"
-    @click="action"
   >
     <span class="flex-1 font-normal text-lg text-center text-white p-1">{{ title }}</span>
     <i

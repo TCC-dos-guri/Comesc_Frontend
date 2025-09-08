@@ -23,7 +23,7 @@ export const useBatchStore = defineStore('batch', () => {
     state.value.loading = true
     try {
       const response = await BatchService.GetBatch()
-      
+
       state.value.batchs = response
       return response
     } catch (error) {
@@ -39,7 +39,7 @@ export const useBatchStore = defineStore('batch', () => {
     state.value.loading = true
     try {
       const response = await BatchService.GetBatchBySearch(search)
-      
+
       state.value.batchs = response
       return response
     } catch (error) {
