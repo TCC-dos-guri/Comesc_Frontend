@@ -27,7 +27,7 @@ function selectOtherOption(option) {
       </span>
       <div class="grid grid-cols-2 gap-1 w-full justify-items-center place-items-center">
         <button
-          v-for="(option, idx) in options"
+          v-for="(option, index) in options"
           :key="option"
           @click="selectOption(option)"
           :class="[
@@ -35,7 +35,7 @@ function selectOtherOption(option) {
             selected === option
               ? 'bg-[#261D47] text-white border-none'
               : 'bg-white text-black border border-[#261D47]',
-            idx === 2 ? 'col-span-2 justify-self-center' : '',
+            index === 2 ? 'col-span-2 justify-self-center' : '',
           ]"
         >
           {{ option }}
@@ -46,18 +46,18 @@ function selectOtherOption(option) {
       class="grid grid-cols-2 w-full h-[70%] p-4 justify-items-center place-items-center"
     >
       <button
-        v-for="(option, idx) in otherOptions"
+        v-for="(option, index) in otherOptions"
         :key="option"
         class="flex flex-col justify-around w-[150px] h-[150px] p-2 border-black border-1"
         @click="selectOtherOption(option)"
         :class="[
-          'w-[50px] py-2 rounded-xl border transition min-w-[120px]',
+          'w-[50px] py-2 rounded-xl border text-sm transition min-w-[120px]',
           selectedOther === option
             ? 'bg-[#261D47] text-white border-none'
             : 'bg-white text-black border border-[#261D47]',
         ]"
       >
-      <i :class="mdiList[idx]"></i>
+      <i :class="mdiList[index]"></i>
         {{ option }}
       </button>
     </div>

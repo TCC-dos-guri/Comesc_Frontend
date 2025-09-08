@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from "vue";
+import { useBatchStore } from "@/stores";
+
+const batchStore = useBatchStore();
 
 import Menu from "@/components/employee-system/layouts/HeaderDefault.vue";
 import Button from "@/components/global/buttons/GlobalButton.vue";
@@ -67,7 +70,7 @@ const currentReview = ref(0);
           </div>
           <div v-else class="flex justify-center items-center w-full">
             <RouterLink
-              to="employee/review_batch/${/*id do lote*/}"
+              :to="`/employee/review_batch/${batchStore.selectedId}`"
               class="flex justify-center items-center w-full"
             >
               <Button
@@ -76,7 +79,6 @@ const currentReview = ref(0);
                 type="submit"
               />
             </RouterLink>
-
           </div>
         </div>
       </div>

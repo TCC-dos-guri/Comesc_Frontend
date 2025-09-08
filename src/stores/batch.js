@@ -6,7 +6,7 @@ import { useStorage } from '@vueuse/core'
 export const useBatchStore = defineStore('batch', () => {
   const state = useStorage( 'batchStorage', {
     batchs: [],
-    selectedbatch: null,
+    selectedbatch: 1,
     batchById: null,
     connection: false,
     error: null,

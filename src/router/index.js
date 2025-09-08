@@ -41,6 +41,9 @@ const router = createRouter({
       path: '/employee/review_batch',
       name: 'review-batch',
       component: ReviewBatch
+    },
+    {
+
     }
   ],
 })

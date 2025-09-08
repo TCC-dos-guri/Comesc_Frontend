@@ -1,12 +1,30 @@
 <script setup>
-import { useBatchStore } from "@/stores";
-import { useRollStore } from "@/stores";
-import { computed, ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useBatchStore, useRollStore } from "@/stores";
+import {  onMounted } from "vue";
 
 // Components
 import Menu from "@/components/employee-system/layouts/HeaderDefault.vue";
 import BatchInfo from "@/components/employee-system/batch/batchInfo.vue";
+import batchOpt from "@/components/employee-system/batch/batchOpt.vue";
+
+const batchStore = useBatchStore();
+const rollStore = useRollStore();
+
+const selectedID = batchStore.selectedbatch;
+
+onMounted(async () => {
+  await batchStore.GetBatchs();
+  await rollStore.GetRolls();
+});
+
+function rollsbatch(){
+  return rollStore.roll.filter((r) => r.batch.id === selectedID);
+}
+
+function getRollField(id, field) {
+  const roll = rollStore.roll.find((r) => r.batch.id === id);
+  return roll[field];
+}
 
 </script>
 
@@ -16,19 +34,17 @@ import BatchInfo from "@/components/employee-system/batch/batchInfo.vue";
 
     <div class="flex justify-center items-center flex-col">
       <i class="text-3xl font-medium">Lote</i>
-      <i class="text-4xl font-medium">Nº <!---do lote--></i>
+      <i class="text-4xl font-medium">Nº {{ selectedID }}</i>
     </div>
 
-    <!--
-    Passar as funçoes de cada coisa para o batchinfo
-    :hex="findHex(localBatch.value)"
-      :cor="findColor(localBatch.value)"
-      :composition="localBatch.value.composition"
-      :amount_pieces="localBatch.value.qtd"
-      :price="localBatch.value.price "
-      :material_name="findMaterial(localBatch.value)"
-      -->
-    <BatchInfo/>
+    <BatchInfo
+    :hex="getRollField(selectedID, 'hex')"
+    :cor="getRollField(selectedID, 'cor')"
+    :composition="getRollField(selectedID, 'composition')"
+    :amount_pieces="getRollField(selectedID, 'amount_pieces')"
+    :price="getRollField(selectedID, 'price')"
+    :material_name="getRollField(selectedID, 'material_name')"
+    />
 
     <div class="flex items-center justify-between p-4 w-full">
       <div class="flex gap-2">
@@ -48,4 +64,14 @@ import BatchInfo from "@/components/employee-system/batch/batchInfo.vue";
     </div>
     <div class="w-full flex flex-2 p-4 relative"></div>
   </div>
+  <batchOpt
+    :leftBtn="() => {x}"
+    leftIcon="mdi mdi-edit-file"
+    lefttitle="Editar"
+    :middleBtn="() => {x}"
+    middletitle="Revisar Lote"
+    :rightBtn="() => {x}"
+    rightIcon="mdi mdi-delete"
+    righttitle="Excluir"
+    />
 </template>
