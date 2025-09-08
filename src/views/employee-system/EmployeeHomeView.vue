@@ -3,6 +3,7 @@ import { HeaderDefault, DefaultCard, BatchFilter, DefaultCardContainer } from '@
 import { useBatchStore, useRollStore } from '@/stores';
 import { onMounted, ref } from 'vue';
 import { useBatchUtils } from '@/utils/batch';
+import router from '@/router';
 const batchStore = useBatchStore()
 const rollStore = useRollStore()
 
@@ -55,7 +56,7 @@ const open = ref(false)
         </div>
 
         <div class="w-full flex justify-center mt-3">
-            <div class="flex gap-3 items-center cursor-pointer ">
+            <div class="flex gap-3 items-center cursor-pointer " @click="router.push('/batch')">
                 <span class="w-8 h-8 rounded-xl flex justify-center items-center bg-[#261D47]">
                     <span class="mdi mdi-plus-circle text-white text-xl "></span>
                 </span>

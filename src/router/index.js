@@ -4,6 +4,7 @@ import LoginView from '@/views/LoginView.vue'
 import Tests from '@/views/components-tests/Tests.vue'
 import EmployeeHomeView from '@/views/employee-system/EmployeeHomeView.vue'
 import BatchView from '@/views/BatchView.vue'
+import RegisterBatchView from '@/views/RegisterBatchView.vue'
 
 
 const router = createRouter({
@@ -29,6 +30,11 @@ const router = createRouter({
       path: '/batch',
       name: 'batch',
       component: BatchView
+    },
+    {
+      path: '/batch/register',
+      name: 'register_batch',
+      component: RegisterBatchView
     },
     {
       path: '/employee',

@@ -1,6 +1,5 @@
 <script setup>
-defineEmits(["click"]);
-defineProps({
+const props = defineProps({
   btnStyle: {
     type: String,
     default: "text-white size-auto rounded-full flex justify-center",
@@ -17,19 +16,26 @@ defineProps({
     type: String,
     default: 'mdi-chevron-right'
   },
-  action: {
-    type: Function,
-  },
   color_text: {
     type: String,
     default: 'text-white'
+  },
+  action: {
+    type: Function,
+    required: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 });
 </script>
 <template>
   <button
     :class="btnStyle"
-    @click="action"
+    @click="action" 
+    :disabled="disabled"
+    
   >
     <span :class="`flex-1 font-normal text-md text-center ${color_text} p-1`">{{ title }}</span>
     <i
@@ -37,8 +43,4 @@ defineProps({
       :class="`mdi ${icon} flex items-center justify-center w-9 h-9 text-[#261D47] text-xl bg-white rounded-full`"
     ></i>
   </button>
-
-  <!--
-  <GlobalButton :btnStyle="['']" title="Proximo passo" :extraDiv="true" /
-  -->
 </template>
