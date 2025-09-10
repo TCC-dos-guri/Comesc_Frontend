@@ -6,6 +6,9 @@ import EmployeeHomeView from '@/views/employee-system/EmployeeHomeView.vue'
 import BatchView from '@/views/BatchView.vue'
 import RegisterBatchView from '@/views/RegisterBatchView.vue'
 
+//Batch Review
+import ReviewHome from '@/views/employee-system/batch-review/ReviewHome.vue'
+import ReviewBatch from '@/views/employee-system/batch-review/ReviewBatch.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +43,19 @@ const router = createRouter({
       path: '/employee',
       name: 'employee-home',
       component: EmployeeHomeView
+    },
+    {
+      path: '/employee/review_home/:id',
+      name: 'review-home',
+      component: ReviewHome
+    },
+    {
+      path: '/employee/review_batch',
+      name: 'review-batch',
+      component: ReviewBatch
+    },
+    {
+
     }
   ],
 })

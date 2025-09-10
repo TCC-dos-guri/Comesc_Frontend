@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   btnStyle: {
     type: String,
     default: "text-white size-auto rounded-full flex justify-center",
@@ -10,7 +10,7 @@ const props = defineProps({
   },
   extraDiv: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   icon: {
     type: String,
@@ -22,6 +22,7 @@ const props = defineProps({
   },
   action: {
     type: Function,
+    default: null,
     required: false
   },
   disabled: {

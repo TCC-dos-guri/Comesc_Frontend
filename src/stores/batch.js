@@ -10,7 +10,7 @@ import router from '@/router'
 export const useBatchStore = defineStore('batch', () => {
   const state = useStorage( 'batchStorage', {
     batchs: [],
-    selectedbatch: null,
+    selectedbatch: 1,
     batchById: null,
     connection: false,
     error: null,
@@ -54,7 +54,7 @@ export const useBatchStore = defineStore('batch', () => {
     state.value.loading = true
     try {
       const response = await BatchService.GetBatch()
-      
+
       state.value.batchs = response
       return response
     } catch (error) {
@@ -70,7 +70,7 @@ export const useBatchStore = defineStore('batch', () => {
     state.value.loading = true
     try {
       const response = await BatchService.GetBatchBySearch(search)
-      
+
       state.value.batchs = response
       return response
     } catch (error) {
