@@ -3,14 +3,12 @@ import { HeaderDefault, DefaultCard, BatchFilter, DefaultCardContainer } from '@
 import { useBatchStore, useRollStore } from '@/stores';
 import { onMounted, ref } from 'vue';
 import { useBatchUtils } from '@/utils/batch';
+import router from '@/router';
 const batchStore = useBatchStore()
 const rollStore = useRollStore()
 
-const findMaterial = (instance) => {
-    return rollStore.roll.find((s) => s.batch.id = instance.id).material.name
-}
-
 onMounted(async()=> {
+    console.log(batchStore.batch)
     await batchStore.GetBatchs()
 })
 
@@ -55,7 +53,7 @@ const open = ref(false)
         </div>
 
         <div class="w-full flex justify-center mt-3">
-            <div class="flex gap-3 items-center cursor-pointer ">
+            <div class="flex gap-3 items-center cursor-pointer " @click="router.push('/batch/register/')">
                 <span class="w-8 h-8 rounded-xl flex justify-center items-center bg-[#261D47]">
                     <span class="mdi mdi-plus-circle text-white text-xl "></span>
                 </span>
@@ -66,9 +64,11 @@ const open = ref(false)
         <div class="w-full flex flex-col p-4 relative">
 
             <BatchFilter @search="search" @filterStatus="filterByStatus"  @open="open = !open" :open="open" />
-
-            <DefaultCardContainer v-if="batchStore.batch.length > 0">
-                <DefaultCard :invoice="batch.invoice" :material_name="findMaterial(batch)" v-for="batch in batchStore.batch" :key="batch.id" @click="batchStore.selectedbatch = batch.id" :status="batch.status" :is_batch="true" :amount="batch.qtd" />
+            <DefaultCardContainer>
+                <div v-if="batchStore.batch !== 0" class="flex flex-col gap-5 w-full"> 
+                    <DefaultCard v-for="info in batchStore.batch" :key="info.id" :amount="info.qtd" :invoice="info.invoice" :image="info.cover?.url" :material_name="info.material" :status="info.status" :is_batch="true" @click="router.push(`/batch/${info.id}`)"/>
+                </div>
+                <div v-else><p>Lotes não encontrados</p></div>
             </DefaultCardContainer>
             <div v-else><p>Lotes não encontrados</p></div>
             
