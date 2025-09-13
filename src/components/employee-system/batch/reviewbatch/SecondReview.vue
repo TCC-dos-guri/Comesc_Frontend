@@ -1,18 +1,13 @@
 <script setup>
 import { useBatchStore } from "@/stores";
-import { ref } from "vue";
 const batchStore = useBatchStore()
 const options = ["Malharia", "Tinturaria", "Ambos"];
-const selected = ref("");
-
 function selectOption(option) {
   batchStore.stateProblems.typeProblems = option;
 }
 
 const otherOptions = ["quebra de agulha", "manchas de oleo", "tecido rasgado", "cor"];
-const mdiList = ["mdi-needle", "mdi-oil", "mdi-scissors-cutting", "mdi-palette"];
-const selectedOther = ref([]);
-
+const mdiList = ["mdi mdi-needle", "mdi mdi-oil", "mdi mdi-scissors-cutting", "mdi mdi-palette"];
 function selectOtherOption(option) {
   batchStore.stateProblems.problems.push(option)
 }
@@ -58,7 +53,7 @@ function selectOtherOption(option) {
             : 'bg-white text-black border border-[#261D47]',
         ]"
       >
-      <i :class="mdiList[index]"></i>
+      <i :class="mdiList[index]" class="text-5xl"></i>
         {{ option }}
       </button>
     </div>
