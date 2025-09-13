@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed } from 'vue'
+import { computed, reactive } from 'vue'
 import { BatchService } from '@/services'
 import { useStorage } from '@vueuse/core'
 import api from '@/plugins/api'
@@ -17,6 +17,12 @@ export const useBatchStore = defineStore('batch', () => {
     loading: false,
   })
 
+  const stateProblems = reactive({
+    typeProblems: '',
+    problems: [],
+    description: ''
+  })
+
   async function arrCreate(batch, rolls){
     const batchObjVal = batch.map(val => val.value)
     const rollsArr = rolls.map(r => ({
@@ -28,7 +34,7 @@ export const useBatchStore = defineStore('batch', () => {
         'Content-Type': 'multipart/form-data'
       }
     })
-    const newObj = { 
+    const newObj = {
         cover: data.attachment_key,
         material: batchObjVal[0],
         supplier: Number(batchObjVal[5]),
@@ -109,7 +115,7 @@ const CreateBatch = async (newBatch) => {
     } finally {
       state.value.loading = false
       showMessage('Lote criado com sucesso', 'success', 1000, 'top-right', 'light', false)
-      
+
       router.push(`/batch/${selectedbatch.value}`)
     }
   }
@@ -126,6 +132,10 @@ const CreateBatch = async (newBatch) => {
       throw error
     } finally {
       state.value.loading = false
+      showMessage('Lote revisado com sucesso', 'success', 1000, 'top-right', 'light', false)
+      setTimeout(() => {
+        router.push(`/batch/${batch.id}`)
+      }, 1000)
     }
   }
 
@@ -152,6 +162,7 @@ const CreateBatch = async (newBatch) => {
     selectedbatch,
     isLoading,
     batchsCount,
+    stateProblems,
     UpdateBatch,
     GetBatchs,
     GetBatchById,

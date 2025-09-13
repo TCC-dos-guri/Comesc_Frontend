@@ -5,9 +5,6 @@ import Tests from '@/views/components-tests/Tests.vue'
 import EmployeeHomeView from '@/views/employee-system/EmployeeHomeView.vue'
 import BatchView from '@/views/BatchView.vue'
 import RegisterBatchView from '@/views/RegisterBatchView.vue'
-
-//Batch Review
-import ReviewHome from '@/views/employee-system/batch-review/ReviewHome.vue'
 import ReviewBatch from '@/views/employee-system/batch-review/ReviewBatch.vue'
 
 const router = createRouter({
@@ -32,7 +29,7 @@ const router = createRouter({
     {
       path: '/batch/:id',
       name: 'batch',
-      component: BatchView
+      component: BatchView,
     },
     {
       path: '/batch/register',
@@ -45,18 +42,10 @@ const router = createRouter({
       component: EmployeeHomeView
     },
     {
-      path: '/employee/review_home/:id',
-      name: 'review-home',
-      component: ReviewHome
-    },
-    {
-      path: '/employee/review_batch',
+      path: '/batch/review_batch/:id',
       name: 'review-batch',
       component: ReviewBatch
     },
-    {
-
-    }
   ],
 })
 

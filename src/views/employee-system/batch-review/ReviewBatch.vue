@@ -1,8 +1,11 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useBatchStore } from "@/stores";
-
+import { useRoute } from "vue-router";
 const batchStore = useBatchStore();
+const route = useRoute()
+
+const {id} = route.params
 
 import Menu from "@/components/employee-system/layouts/HeaderDefault.vue";
 import Button from "@/components/global/buttons/GlobalButton.vue";
@@ -15,6 +18,20 @@ import Conclusion from "@/components/employee-system/batch/reviewbatch/ReviewCon
 
 const steps = [FirstReview, SecondReview, ThirdReview, FourthReview, Conclusion];
 const currentReview = ref(0);
+
+async function FinalReview(param){
+  if(param === 'concluir'){
+    batchStore.batchById.status = 'com defeito'
+  }
+  else{
+    batchStore.batchById.status = 'em estoque'
+  }
+  await batchStore.UpdateBatch(batchStore.batchById)
+}
+
+onMounted(async () => {
+  await batchStore.GetBatchById(id * 1)
+})
 </script>
 
 <template>
@@ -25,16 +42,13 @@ const currentReview = ref(0);
       <div class="w-full h-[5vh] flex flex-col items-center justify-center">
         <div class="text-center">
           <div class="text-lg font-medium">
-            Rolo
-            <!-- Numero do rolo -->
-            /
-            <!-- Quantos rolos revisados -->
+            Rolos com defeito: {{ batchStore.batchById.nonconformity_rolls }}
           </div>
         </div>
       </div>
 
       <div class="flex flex-col h-[75vh] justify-center items-center">
-        <component :is="steps[currentReview]" @RelatedProblem="currentReview++" />
+        <component :is="steps[currentReview]" :nonconformity_rolls="batchStore.batchById.nonconformity_rolls" @RelatedProblem="currentReview++" @FinalReview="FinalReview"/>
       </div>
 
       <div class="flex justify-center items-center">
@@ -69,16 +83,12 @@ const currentReview = ref(0);
             </Button>
           </div>
           <div v-else class="flex justify-center items-center w-full">
-            <RouterLink
-              :to="`/employee/review_batch/${batchStore.selectedId}`"
-              class="flex justify-center items-center w-full"
-            >
               <Button
                 :title="'Concluir revisão'"
                 :btnStyle="'bg-[#261D47] w-[220px] h-[48px] rounded-xl text-white text-base font-semibold'"
                 type="submit"
+                @click="FinalReview('concluir')"
               />
-            </RouterLink>
           </div>
         </div>
       </div>

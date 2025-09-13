@@ -1,5 +1,7 @@
 <script setup>
+import { useBatchStore } from '@/stores';
 
+const batchStore = useBatchStore()
 </script>
 
 <template>
@@ -10,6 +12,7 @@
     <textarea
       class="w-full max-w-[340px] h-[500px] bg-gray-200 rounded-xl p-4 text-base text-gray-500 resize-none outline-none"
       placeholder="Descreva em detalhes o problema aqui..."
+      v-model="batchStore.stateProblems.description"
     ></textarea>
   </div>
 </template>

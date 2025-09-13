@@ -24,7 +24,7 @@
     function createRoll(){
         const newRoll = {
             kg: infoRolls.value[3].value,
-            defective: isActive.value,
+            nonconformity: isActive.value,
         }
         rolls.value.push(newRoll)
         

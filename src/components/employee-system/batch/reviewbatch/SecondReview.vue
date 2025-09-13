@@ -1,19 +1,20 @@
 <script setup>
+import { useBatchStore } from "@/stores";
 import { ref } from "vue";
-
+const batchStore = useBatchStore()
 const options = ["Malharia", "Tinturaria", "Ambos"];
 const selected = ref("");
 
 function selectOption(option) {
-  selected.value = option;
+  batchStore.stateProblems.typeProblems = option;
 }
 
 const otherOptions = ["quebra de agulha", "manchas de oleo", "tecido rasgado", "cor"];
 const mdiList = ["mdi-needle", "mdi-oil", "mdi-scissors-cutting", "mdi-palette"];
-const selectedOther = ref("");
+const selectedOther = ref([]);
 
 function selectOtherOption(option) {
-  selectedOther.value = option;
+  batchStore.stateProblems.problems.push(option)
 }
 </script>
 
@@ -32,7 +33,7 @@ function selectOtherOption(option) {
           @click="selectOption(option)"
           :class="[
             'w-[50px]  py-2 rounded-full border transition min-w-[120px]',
-            selected === option
+            batchStore.stateProblems.typeProblems === option
               ? 'bg-[#261D47] text-white border-none'
               : 'bg-white text-black border border-[#261D47]',
             index === 2 ? 'col-span-2 justify-self-center' : '',
@@ -52,7 +53,7 @@ function selectOtherOption(option) {
         @click="selectOtherOption(option)"
         :class="[
           'w-[50px] py-2 rounded-xl border text-sm transition min-w-[120px]',
-          selectedOther === option
+          batchStore.stateProblems.problems.includes(option)
             ? 'bg-[#261D47] text-white border-none'
             : 'bg-white text-black border border-[#261D47]',
         ]"
