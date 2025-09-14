@@ -63,7 +63,7 @@ const open = ref(false)
             <BatchFilter @search="search" @filterStatus="filterByStatus"  @open="open = !open" :open="open" />
             <DefaultCardContainer>
                 <div v-if="batchStore.batch !== 0" class="flex flex-col gap-5 w-full"> 
-                    <DefaultCard v-for="info in batchStore.batch" :key="info.id" :amount="info.qtd" :invoice="info.invoice" :image="info.cover?.url" :material_name="info.material" :status="info.status" :is_batch="true" @click="router.push(`/batch/${info.id}/`)"/>
+                    <DefaultCard v-for="info in batchStore.batch" :key="info.id" :amount="info?.qtd" :invoice="info?.invoice" :image="info?.cover?.url" :material_name="info?.material" :status="info?.status" :is_batch="true" @click="router.push(`/batch/${info.id}/`)"/>
                 </div>
                 <div v-else><p>Lotes não encontrados</p></div>
             </DefaultCardContainer>        

@@ -73,7 +73,7 @@
                     <p class="text-[#bbbbbb]"><i class="mdi mdi-delete"></i>Excluir</p>
                 </div>
                 <div v-if="rolls.length !== 0">
-                    <RollCard v-for="info, i in rolls" :key="i" :production_order="info.production_order" :kg="info.kg" :defective="info.defective"/>
+                    <RollCard v-for="info, i in rolls" :key="i" :production_order="info.production_order" :kg="info.kg" :defective="info.nonconformity"/>
                 </div>
                 <div v-else>
                     <p class="text-center">ainda não há rolos cadastrados</p>

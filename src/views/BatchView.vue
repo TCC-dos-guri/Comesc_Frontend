@@ -28,12 +28,12 @@ onMounted( async () => {
     <HeaderDefault />
     <div class="p-5 flex flex-col gap-5">
         <h1 class="text-center text-3xl font-semibold">Lote</h1>
-        <h1 class="text-center text-4xl font-semibold">Nº {{ batchStore.batchById.invoice }}</h1>
+        <h1 class="text-center text-4xl font-semibold">Nº {{ batchStore.batchById?.invoice }}</h1>
     </div>
     <div class="relative w-full h-96">
-        <img :src="batchStore.batchById.cover.url" alt="" class="w-full h-96 absolute">
+        <img :src="batchStore.batchById?.cover?.url" alt="" class="w-full h-96 absolute">
         <div class="w-100 flex flex-col relative text-white p-5 gap-5">
-            <h1 class="text-center text-2xl">{{ batchStore.batchById.material }}</h1>
+            <h1 class="text-center text-2xl">{{ batchStore.batchById?.material }}</h1>
             <h2 class="text-center text-xl">informações</h2>
             <div class="flex justify-between" v-for="info, i in infoArr" :key="i">
                 <h1>{{ Object.keys(info)[0] }}:</h1>
@@ -48,11 +48,11 @@ onMounted( async () => {
             </div>
             <h1>Informações</h1>
         </div>
-        <h1>Rolos Revisados: 0/{{ rollStore.roll.length }}</h1>
+        <h1>Rolos Revisados: 0/{{ rollStore?.roll.length }}</h1>
     </div>
     <DefaultCardContainer>
-        <DefaultCard v-for="roll in rollStore.roll.filter((el) => el.batch.id === id * 1)" :key="roll.production_order"
-            :invoice="roll.production_order" :material_name="`${roll.kg}kg`" :image="batchStore.batchById.cover.url" />
+        <DefaultCard v-for="roll in rollStore.roll.filter((el) => el.batch.id === id * 1)" :key="roll?.production_order"
+            :invoice="roll.production_order" :material_name="`${roll.kg}kg`" :image="batchStore.batchById?.cover?.url" />
     </DefaultCardContainer>
     <LayoutBarAction :id_batch="id"/>
 </template>
