@@ -3,14 +3,17 @@ import LayoutBarAction from '@/components/layouts/LayoutBarAction.vue';
 import DefaultCardContainer from '@/components/employee-system/layouts/containers/DefaultCardContainer.vue';
 import DefaultCard from '@/components/global/cards/DefaultCard.vue';
 import { HeaderDefault } from '@/components';
-import { useBatchStore, useRollStore } from '@/stores';
+import { useBatchStore, useRollStore, useReportStore } from '@/stores';
 import { onMounted, ref} from 'vue';
 import { useRoute } from 'vue-router';
+import GlobalSpin from '@/components/global/dialog/GlobalSpin.vue';
 const batchStore = useBatchStore()
 const rollStore = useRollStore()
+const reportStore = useReportStore()
 const infoArr = ref([])
 const route = useRoute()
 const {id} = route.params
+
 
 onMounted( async () => {
     await batchStore.GetBatchById(id)
@@ -54,5 +57,6 @@ onMounted( async () => {
         <DefaultCard v-for="roll in rollStore.roll.filter((el) => el.batch.id === id * 1)" :key="roll?.production_order"
             :invoice="roll.production_order" :material_name="`${roll.kg}kg`" :image="batchStore.batchById?.cover?.url" />
     </DefaultCardContainer>
-    <LayoutBarAction :id_batch="id"/>
+    <LayoutBarAction :status="infoArr[4]"  :id_batch="id"/>
+    <GlobalSpin title="Gerando o Relatório..." v-if="reportStore.loading"/>
 </template>
