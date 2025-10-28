@@ -1,5 +1,6 @@
 <script setup>
-defineProps({
+defineEmits(["click"]);
+const props = defineProps({
   btnStyle: {
     type: String,
     default: "text-white size-auto rounded-full flex justify-center",
@@ -34,9 +35,9 @@ defineProps({
 <template>
   <button
     :class="btnStyle"
-    @click="action" 
+    @click="action"
     :disabled="disabled"
-    
+
   >
     <span :class="`flex-1 font-normal text-md text-center ${color_text} p-1`">{{ title }}</span>
     <i
