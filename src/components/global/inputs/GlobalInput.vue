@@ -28,7 +28,11 @@ defineProps({
   },
   options: {
     type: Array,
-    default: () => [] // [{ value: '1', label: 'Fornecedor A' }]
+    default: () => []
+  },
+  type: {
+    type: String,
+    default: 'text' // 👈 novo aqui
   }
 })
 
@@ -40,7 +44,7 @@ const model = defineModel('value')
   <div class="flex flex-col gap-2" v-if="!media && !select">
     <label v-if="label" class="text-xl ms-1">{{ label }}</label>
     <input
-      type="text"
+      :type="type" 
       :placeholder="placeholder"
       :class="class_input"
       v-model="model"
