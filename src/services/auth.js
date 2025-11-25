@@ -63,7 +63,19 @@ async CreateUser(newUser) {
       throw error
     }
   }
-
+  async GetMe(token){
+    try {
+      const response = await api.get(`/usuarios/me/`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      return response.data
+    } catch (error) {
+      console.log('error in deleteUser', error)
+      throw error
+    }
+  }
 }
 
 export default new UserService();

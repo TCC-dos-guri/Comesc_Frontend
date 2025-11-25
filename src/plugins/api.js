@@ -3,7 +3,7 @@ import axios from "axios";
 const apiURL = import.meta.env.VITE_API_URL
 //Allows the application to make requisition with the backend
 const api = axios.create({
-    baseURL: apiURL,
+    baseURL: 'http://localhost:8000/api',
     headers: {
         "Content-Type": "application/json"
     }
@@ -14,14 +14,20 @@ const api = axios.create({
 
 api.interceptors.request.use(
     (config) => {
-        const token = localStorage.getItem('access');
-        if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`;
+        const storage = localStorage.getItem('userStorage');
+
+        if (storage) {
+            const user = JSON.parse(storage);
+            const token = user.access;
+
+            if (token) {
+                config.headers['Authorization'] = `Bearer ${token}`;
+            }
         }
+
         return config;
     },
     (error) => {
-
         return Promise.reject(error);
     }
 );
