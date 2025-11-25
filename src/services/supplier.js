@@ -4,7 +4,8 @@ class SupplierService {
   async GetSuppliers() {
     try {
       const response = await api.get('/supplier/')
-      return response
+      console.log(response)
+      return response.data
     } catch (error) {
       console.log('error in GetSuppliers', error)
       throw error
