@@ -62,11 +62,29 @@ export const useAuthStore = defineStore('auth', () => {
       state.value.connection = true
       if (access.value && !error.value) {
         showMessage('Logado com sucesso', 'success', 1000, 'top-right', 'light', false)
-        setTimeout(() => {router.push('/employee')}, 1000)
+        await GetMe()
+        setTimeout(() => {
+          router.push('/employee/')
+        },1000)
       } else if (error.value && !access.value) {
         showMessage('Credenciais inválidas', 'error', 1000, 'top-right', 'light', false)
         state.value.error = null
       }
+    }
+  }
+
+  const GetMe = async () => {
+    state.value.loading = true
+    try {
+      const response = await UserService.GetMe()
+      state.value.me = response
+      console.log(response)
+    } catch (error) {
+      state.value.error = error
+      throw error
+    } finally {
+      state.value.loading = false
+      state.value.connection = true
     }
   }
 

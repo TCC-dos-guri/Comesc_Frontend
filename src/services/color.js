@@ -5,7 +5,8 @@ class ColorService {
   async GetColor() {
     try{
       const response = await api.get('/color/')
-      return response
+      console.log(response)
+      return response.data
     }catch (error){
       console.log('error in GetColor', error)
       throw error

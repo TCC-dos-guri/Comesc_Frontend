@@ -28,6 +28,14 @@ onMounted(async () => {
   await supplierStore.GetSuppliers()
   await colorStore.GetColors()
 })
+const supplierOptions = computed(() =>
+  supplierStore.suppliers?.map(s => ({ value: s.id, label: s.name })) || []
+)
+
+const colorsOptions = computed(() =>
+  colorStore.colors?.map(s => ({ value: s.id, label: s.name })) || []
+)
+
 
 const formInputs = ref([
     {
@@ -41,7 +49,7 @@ const formInputs = ref([
     placeholder: 'Selecione a cor',
     value: '',
     select: true,
-    options: colorStore.colors.map(c => ({ value: c.id, label: c.name }))
+    options: colorsOptions.value
   },
     {
         title: 'Composição',
@@ -63,7 +71,7 @@ const formInputs = ref([
     placeholder: 'Selecione o fornecedor',
     value: '',
     select: true,
-    options: supplierStore.suppliers.map(s => ({ value: s.id, label: s.name }))
+    options: supplierOptions.value
   },
     {
         title: 'Peso',

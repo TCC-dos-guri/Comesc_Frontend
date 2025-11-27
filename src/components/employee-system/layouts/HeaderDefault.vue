@@ -4,16 +4,29 @@ import router from '@/router'
 import { useAuthStore } from '@/stores'
 const authStore = useAuthStore()
 const items = ref([
-   { name: 'Tela Inicial', url: '/employee', icon: 'mdi-menu' },
-  { name: 'Cadastro Geral', url: '/register', icon: 'mdi-clipboard-text' },
+  { name: 'Tela Inicial', url: '/employee', icon: 'mdi-menu' },
+  {
+    name: 'Cadastro Geral',
+    icon: 'mdi-clipboard-text',
+    children: [
+      { name: 'Cores', url: '/register/colors' },
+      { name: 'Fornecedores', url: '/register/suppliers' },
+      { name: 'Estado', url: '/register/state' },
+        { name: 'Endereços', url: '/register/address' }
+    ]
+  },
   { name: 'Relatórios', url: '/reports', icon: 'mdi-chart-line' },
   { name: 'Estoque', url: '/stock', icon: 'mdi-package-variant' },
   { name: 'Perfil', url: '/profile', icon: 'mdi-account' }
 ])
+const openSubmenu = ref(null)
 
+const toggleSubmenu = (index) => {
+  openSubmenu.value = openSubmenu.value === index ? null : index
+}
 const open = ref(false)
 const isClosing = ref(false)
-const notifications = ref(3) // Número de notificações
+const notifications = ref(3)
 
 const hasNotifications = computed(() => notifications.value > 0)
 
@@ -201,26 +214,39 @@ const navigateTo = (url) => {
       </div>
 
       <nav class="p-6">
-        <ul class="flex flex-col gap-2">
-          <li
-            v-for="(item, index) in items"
-            :key="index"
-            @click="navigateTo(item.url)"
-            class="flex items-center gap-3 p-4 rounded-xl cursor-pointer hover:bg-gray-100 transition-all group"
-            :class="isClosing ? 'close-animate-list' : 'open-animate-list'"
-            :style="`animation-delay: ${index * 0.05}s`"
-          >
-            <div class="w-10 h-10 rounded-lg bg-[#261D47] text-white bg-opacity-10 flex items-center justify-center group-hover:bg-opacity-20 transition-colors">
-              <span
-                :class="`mdi ${item.icon} text-xl text-[#fff]`"
-              ></span>
-            </div>
-            <span class="font-medium text-gray-700 group-hover:text-[#261D47] transition-colors">
-              {{ item.name }}
-            </span>
-            <span class="mdi mdi-chevron-right ml-auto text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-          </li>
-        </ul>
+       <ul class="flex flex-col gap-2">
+  <li v-for="(item, index) in items" :key="index">
+    <div
+      @click="item.children ? toggleSubmenu(index) : navigateTo(item.url)"
+      class="flex items-center gap-3 p-4 rounded-xl cursor-pointer hover:bg-gray-100 transition-all group"
+    >
+      <div class="w-10 h-10 rounded-lg bg-[#261D47] text-white bg-opacity-10 flex items-center justify-center group-hover:bg-opacity-20 transition-colors">
+        <span :class="`mdi ${item.icon} text-xl text-[#fff]`"></span>
+      </div>
+      <span class="font-medium text-gray-700 group-hover:text-[#261D47] transition-colors">
+        {{ item.name }}
+      </span>
+      <i
+        v-if="item.children"
+        class="mdi mdi-chevron-down ml-auto transition-transform"
+        :class="{'rotate-180': openSubmenu === index}"
+      ></i>
+    </div>
+
+    <!-- Submenu -->
+    <ul v-if="item.children && openSubmenu === index" class="pl-12 flex flex-col gap-1 mt-1">
+      <li
+        v-for="(child, childIndex) in item.children"
+        :key="childIndex"
+        @click="navigateTo(child.url)"
+        class="cursor-pointer text-gray-600 hover:text-[#261D47] transition-colors"
+      >
+        {{ child.name }}
+      </li>
+    </ul>
+  </li>
+</ul>
+
       </nav>
 
       <div class="absolute bottom-0 left-0 right-0 p-6 border-t border-gray-200 bg-gray-50">

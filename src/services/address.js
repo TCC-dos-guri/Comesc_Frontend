@@ -15,7 +15,7 @@ class AddressService{
 
 async GetAddressById(addressId) {
     try {
-      const response = await api.get(`/api/?page=1&id=${addressId}`)
+      const response = await api.get(`/address?page=1&id=${addressId}`)
       return response.data
     } catch (error) {
       console.log('error in getAddressById', error)
@@ -25,7 +25,7 @@ async GetAddressById(addressId) {
 
 async CreateAddress(newAddress) {
     try {
-      const response = await api.post(`/api/`, newAddress)
+      const response = await api.post(`/address/`, newAddress)
       return response.data
     } catch (error) {
       console.log('error in createAddress', error)
@@ -35,7 +35,7 @@ async CreateAddress(newAddress) {
 
   async UpdateAddress(address) {
     try {
-      const response = await api.put(`/api/${address.id}/`, address)
+      const response = await api.put(`/address/${address.id}/`, address)
       return response.data
     } catch (error) {
       console.log('error in updateAddress', error)
@@ -45,7 +45,7 @@ async CreateAddress(newAddress) {
 
   async DeleteAddress(id) {
     try {
-      const response = await api.delete(`/api/${id}/`)
+      const response = await api.delete(`/address/${id}/`)
       return response.data
     } catch (error) {
       console.log('error in deleteAddress', error)

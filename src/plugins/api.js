@@ -9,20 +9,22 @@ const api = axios.create({
     }
 })
 
-
-//Add token automatically to every requisition if it needs a token to request
-
 api.interceptors.request.use(
     (config) => {
-        const tokenString = localStorage.getItem('userStorage'); // vem como string
-        const token = JSON.parse(tokenString);
-        if (token.access) {
-            config.headers['Authorization'] = `Bearer ${token.access}`;
+        const storage = localStorage.getItem('userStorage');
+
+        if (storage) {
+            const user = JSON.parse(storage);
+            const token = user.access;
+
+            if (token) {
+                config.headers['Authorization'] = `Bearer ${token}`;
+            }
         }
+
         return config;
     },
     (error) => {
-
         return Promise.reject(error);
     }
 );

@@ -1,11 +1,13 @@
 <script setup>
 import { HeaderDefault, DefaultCard, BatchFilter, DefaultCardContainer } from '@/components';
-import { useBatchStore, useRollStore } from '@/stores';
+import { useBatchStore, useRollStore, useAuthStore } from '@/stores';
+
 import { onMounted, ref } from 'vue';
 import { useBatchUtils } from '@/utils/batch';
 import router from '@/router';
 
 const batchStore = useBatchStore()
+const authStore = useAuthStore()
 
 onMounted(async() => {
     console.log(batchStore.batch)
@@ -18,8 +20,8 @@ const {
 } = useBatchUtils()
 
 const open = ref(false)
-</script>
 
+</script>
 <template>
     <main class="w-full min-h-screen bg-gray-50">
         <HeaderDefault />
@@ -30,7 +32,7 @@ const open = ref(false)
             <div class="text-[40px] justify-start font-medium flex w-11/12 mx-auto mt-10">
                 <div class="flex flex-col gap-2 animate-fade-in">
                     <h1 class="text-hello text-[#BBBBBB]">Ola</h1>
-                    <h1 class="text-[#261D47]">Gabriel!</h1>
+                    <h1 class="text-[#261D47]">{{ authStore.me.first_name + '   ' + authStore.me.last_name }}</h1>
                 </div>
             </div>
 
