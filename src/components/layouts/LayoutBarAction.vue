@@ -5,6 +5,9 @@ import router from '@/router';
 import { onMounted } from 'vue';
 import { ref, watch } from 'vue';
 import { useReportStore } from '@/stores';
+
+const emit = defineEmits(['open'])
+
 const reportStore = useReportStore()
 
 const props = defineProps({
@@ -30,6 +33,9 @@ watch(() => props.status, (newValue) => {
 async function verifyTitle(param) {
   if (param === 'Revisar') {
     router.push(`/batch/review_batch/${props.id_batch}`)
+  }
+  else if(param == 'Excluir'){
+    emit('open')
   }
   else if(param === 'Gerar Relátorio'){
     await reportStore.generateReport(props.id_batch)

@@ -195,17 +195,21 @@ const CreateBatch = async (newBatch) => {
 
   const DeleteBatch = async (id) => {
     state.value.loading = true
+    console.log(id)
     try {
-      const index = state.value.batchs.findIndex((s) => s.id === id)
+      const index = state.value.batchs.findIndex((s) => s.id === Number(id))
+      console.log(index)
       if (index !== -1) {
         await BatchService.DeleteBatch(id)
         state.value.batchs.splice(index, 1)
+        console.log(state.value.batchs)
       }
     } catch (error) {
       state.value.error = error
       throw error
     } finally {
       state.value.loading = false
+      router.push('/employee/')
     }
   }
 
