@@ -7,6 +7,7 @@ import { useBatchStore, useRollStore, useReportStore } from '@/stores';
 import { onMounted, ref} from 'vue';
 import { useRoute } from 'vue-router';
 import GlobalSpin from '@/components/global/dialog/GlobalSpin.vue';
+import ExcludeDialog from '@/components/employee-system/batch/ExcludeDialog.vue';
 
 const batchStore = useBatchStore()
 const rollStore = useRollStore()
@@ -14,6 +15,16 @@ const reportStore = useReportStore()
 const infoArr = ref([])
 const route = useRoute()
 const {id} = route.params
+const close = ref(false)
+
+async function ExcludeBatch(action){
+  if(action == 's'){
+    await batchStore.DeleteBatch(id)
+  }
+  else{
+    close.value = false
+  }
+}
 
 onMounted( async () => {
     await batchStore.GetBatchById(id)
@@ -197,9 +208,9 @@ onMounted( async () => {
             </div>
         </div>
     </div>
-
-    <LayoutBarAction :status="infoArr[4]" :id_batch="id"/>
+    <LayoutBarAction :status="infoArr[4]" @open="close = !close" :id_batch="id"/>
     <GlobalSpin title="Gerando o Relatório..." v-if="reportStore.loading"/>
+    <ExcludeDialog @close="ExcludeBatch" v-if="close"/>
 </template>
 
 <style scoped>

@@ -1,16 +1,13 @@
 import axios from "axios";
 
-const apiURL = import.meta.env.VITE_API_URL
+const apiURL = 'http://localhost:8000/api'
 //Allows the application to make requisition with the backend
 const api = axios.create({
-    baseURL: 'http://localhost:8000/api',
+    baseURL: apiURL,
     headers: {
         "Content-Type": "application/json"
     }
 })
-
-
-//Add token automatically to every requisition if it needs a token to request
 
 api.interceptors.request.use(
     (config) => {

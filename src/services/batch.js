@@ -54,7 +54,8 @@ class BatchService {
 
   async DeleteBatch(batchId) {
     try{
-      const response = await api.delete(`/color/${batchId}/`)
+      const response = await api.delete(`/batch/${batchId}/`)
+      console.log(response)
       return response.data
     }catch (error){
       console.log('error in DeleteBatch', error)
