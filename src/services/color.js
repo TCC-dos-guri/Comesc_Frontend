@@ -15,7 +15,7 @@ class ColorService {
 
   async GetColorById(colorId) {
     try{
-      const response = await api.get(`/color/?page=1&id=${colorId}`)
+      const response = await api.get(`/color/${colorId}`)
       return response.data
     }catch (error){
       console.log('error in GetColorById', error)
@@ -35,6 +35,7 @@ class ColorService {
 
   async UpdateColor(color) {
     try{
+      console.log('ele diz q sim', color)
       const response = await api.put(`/color/${color.id}/`, color)
       return response.data
     }catch (error){

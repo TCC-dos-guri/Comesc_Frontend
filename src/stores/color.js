@@ -63,13 +63,17 @@ const CreateColor = async (newColor) => {
   }
 
   const UpdateColor = async (color) => {
+
     state.value.loading = true
     try {
       const index = state.value.colors.findIndex((s) => s.id === color.id)
-      if (index !== -1) {
+
+
         state.value.colors[index] = await ColorService.UpdateColor(color)
-      }
+
+
     } catch (error) {
+      console.log(error)
       state.value.error = error
       throw error
     } finally {

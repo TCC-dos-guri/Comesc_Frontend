@@ -69,9 +69,9 @@ export const useSupplierStore = defineStore('supplier', () => {
     state.value.loading = true
     try {
       const index = state.value.suppliers.findIndex((s) => s.id === supplier.id)
-      if (index !== -1) {
+
         state.value.suppliers[index] = await SupplierService.UpdateSupplier(supplier)
-      }
+      
     } catch (error) {
       state.value.error = error
       throw error

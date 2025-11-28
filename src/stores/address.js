@@ -69,9 +69,9 @@ export const useAddressStore = defineStore('address', () => {
       state.value.loading = true
       try {
         const index = state.value.address.findIndex((s) => s.id === address.id)
-        if (index !== -1) {
+
           state.value.address[index] = await AddressService.UpdateAddress(address)
-        }
+        
       } catch (error) {
         state.value.error = error
         throw error
@@ -88,7 +88,7 @@ export const useAddressStore = defineStore('address', () => {
           await AddressService.DeleteAddress(id)
           state.value.address.splice(index, 1)
         }
-        
+
       } catch (error) {
         state.value.error = error
         throw error

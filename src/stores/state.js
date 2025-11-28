@@ -69,9 +69,9 @@ export const useStateStore = defineStore('state', () => {
     state.value.loading = true
     try {
       const index = state.value.states.findIndex((s) => s.id === updatedState.id)
-      if (index !== -1) {
+
         state.value.states[index] = await StateService.UpdateState(updatedState)
-      }
+      
     } catch (error) {
       state.value.error = error
       throw error

@@ -15,7 +15,7 @@ class AddressService{
 
 async GetAddressById(addressId) {
     try {
-      const response = await api.get(`/address?page=1&id=${addressId}`)
+      const response = await api.get(`/address/${addressId}`)
       return response.data
     } catch (error) {
       console.log('error in getAddressById', error)
