@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiURL = 'http://localhost:8000/api'
+const apiURL = import.meta.env.VITE_API_URL
 //Allows the application to make requisition with the backend
 const api = axios.create({
     baseURL: apiURL,
