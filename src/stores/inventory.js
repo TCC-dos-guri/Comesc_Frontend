@@ -5,7 +5,7 @@ import { useStorage } from '@vueuse/core'
 
 export const useInventoryStore = defineStore('inventory', () => {
   const state = useStorage('inventoryStorage', {
-    inventorys: [], 
+    inventorys: [],
     selectedinventory: null,
     inventoryById: null,
     connection: false,
@@ -52,7 +52,9 @@ export const useInventoryStore = defineStore('inventory', () => {
   const CreateInventory = async (newInventory) => {
     state.value.loading = true
     try {
-      const response = await InventoryService.Createinventory(newInventory)
+      console.log('chega')
+      const response = await InventoryService.CreateInventory(newInventory)
+      console.log('bro')
       state.value.inventorys.push(response)
       return response
     } catch (error) {
