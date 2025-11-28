@@ -15,6 +15,16 @@ const items = ref([
         { name: 'Endereços', url: '/register/address' }
     ]
   },
+   {
+    name: 'Pré Cadastros Gerais',
+    icon: 'mdi-clipboard-text',
+    children: [
+      { name: 'Cores', url: '/register/colors/list' },
+      { name: 'Fornecedores', url: '/register/suppliers/list' },
+      { name: 'Estado', url: '/register/state/list' },
+        { name: 'Endereços', url: '/register/address/list' }
+    ]
+  },
   { name: 'Relatórios', url: '/reports', icon: 'mdi-chart-line' },
   { name: 'Estoque', url: '/stock', icon: 'mdi-package-variant' },
   { name: 'Perfil', url: '/profile', icon: 'mdi-account' }

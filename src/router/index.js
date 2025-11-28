@@ -14,6 +14,10 @@ import ColorsEditView from '@/views/employee-system/edition/ColorsEditView.vue'
 import SuppliersEditView from '@/views/employee-system/edition/SuppliersEditView.vue'
 import StateEditView from '@/views/employee-system/edition/StateEditView.vue'
 import AddressEditView from '@/views/employee-system/edition/AddressEditView.vue'
+import ColorsListView from '@/views/employee-system/list/ColorsListView.vue'
+import SuppliersListView from '@/views/employee-system/list/SuppliersListView.vue'
+import StateListView from '@/views/employee-system/list/StateListView.vue'
+import AddressListView from '@/views/employee-system/list/AddressListView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -63,6 +67,11 @@ const router = createRouter({
           component: ColorsRegisterView
         },
          {
+          path: 'colors/list',
+          name: 'register-colors-list',
+          component: ColorsListView
+        },
+         {
           path: 'colors/:id',
           name: 'register-colors-edit',
           component: ColorsEditView
@@ -77,6 +86,11 @@ const router = createRouter({
           name: 'register-suppliers',
           component: SuppliersRegisterView
         },
+        {
+          path: 'suppliers/list',
+          name: 'register-suppliers-list',
+          component: SuppliersListView
+        },
 
             {
           path: 'state',
@@ -88,10 +102,20 @@ const router = createRouter({
           name: 'register-state-edit',
           component: StateEditView
         },
+            {
+          path: 'state/list',
+          name: 'register-state-list',
+          component: StateListView
+        },
          {
           path: 'address',
           name: 'register-address',
           component: AddressRegisterView
+        },
+         {
+          path: 'address/list',
+          name: 'register-address-list',
+          component: AddressListView
         },
           {
           path: 'address/:id',
