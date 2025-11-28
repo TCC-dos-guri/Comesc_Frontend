@@ -26,7 +26,7 @@ const items = ref([
     ]
   },
   { name: 'Relatórios', url: '/reports', icon: 'mdi-chart-line' },
-  { name: 'Estoque', url: '/stock', icon: 'mdi-package-variant' },
+  { name: 'Estoque', url: '/entry/list', icon: 'mdi-package-variant' },
   { name: 'Perfil', url: '/profile', icon: 'mdi-account' }
 ])
 const openSubmenu = ref(null)

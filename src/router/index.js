@@ -18,6 +18,9 @@ import ColorsListView from '@/views/employee-system/list/ColorsListView.vue'
 import SuppliersListView from '@/views/employee-system/list/SuppliersListView.vue'
 import StateListView from '@/views/employee-system/list/StateListView.vue'
 import AddressListView from '@/views/employee-system/list/AddressListView.vue'
+import BatchEditView from '@/views/employee-system/edition/BatchEditView.vue'
+import EntryInventoryView from '@/views/entry/EntryInventoryView.vue'
+import EntryInventoryListView from '@/views/employee-system/list/EntryInventoryListView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -42,10 +45,25 @@ const router = createRouter({
       name: 'batch',
       component: BatchView,
     },
+     {
+      path: '/entry',
+      name: 'entry',
+      component: EntryInventoryView,
+    },
+     {
+      path: '/entry/list',
+      name: 'entry-list',
+      component: EntryInventoryListView,
+    },
     {
       path: '/batch/register',
       name: 'register_batch',
       component: RegisterBatchView
+    },
+     {
+      path: '/batch/register/:id',
+      name: 'register_batch_edit',
+      component: BatchEditView
     },
     {
       path: '/employee',

@@ -40,6 +40,9 @@ async function verifyTitle(param) {
   else if(param === 'Gerar Relátorio'){
     await reportStore.generateReport(props.id_batch)
   }
+  else if (param === 'Editar') {
+    router.push('/batch/register/' + props.id_batch)
+  }
 }
 </script>
 
